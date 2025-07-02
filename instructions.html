@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,40 @@
     <script src="js/app.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <a href="game.html">Go to Game</a>
+
+    <header>
+        <h1>🌌Instructions🚀</h1>
+    </header>
+
+    <main>
+
+        <section class="instructions"><!--used a section tag bcz all related content so i grouped them together-->
+
+            <ul><!--used ul to make an a list for the rules-->
+                <li>Guess the letters in the secret word one at a time.</li>
+                <li>Each wrong guess brings the spaceman closer to danger!</li>
+                <li>You win if you guess all letters before using all attempts.</li>
+                <li>You lose if the spaceman drifts away (all attempts used).</li>
+                <li>You can start over or play again by clicking on reset</li>
+                <li>Have fun and good luck!</li>
+            </ul>
+
+        </section>
+
+        <div class="button-container">
+
+            <a href="index.html"> <!-- with the help of the a tag i can shift between pages back and forth-->
+                <button class="back-btn">← Back to Home</button>
+            </a>
+
+            <a href="game.html">
+                <button class="next-btn">Start the Game</button>
+            </a>
+        </div> <!-- using a div tag will help me edit my buttons manually later on -->
+
+    </main>
 </body>
+
 </html>
