@@ -1,18 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=#, initial-scale=1.0">
-    <title>Spaceman Play</title>
-    <script src="js/app.js" defer></script>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spaceman Game</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script defer src="js/app.js"></script>
 </head>
+
 <body>
     <header>
-        <h1>Lets begin</h1>
+        <h1>🚀 Spaceman Game 🌌</h1>
     </header>
+
     <main>
-        <p>
-    <a href="index.html">Back to Home</a>
+        <div class="Gallows"><!--this div class is used to group the gallow and hangman together-->
+            <div class="gallow">
+                <!-- i used the div to group the gallows parts and class them so that i can easily edit it in one go in the css file-->
+                <div class="gallow-vertical"></div>
+                <div class="gallow-top"></div>
+                <div class="gallow-rope"></div>
+            </div>
+
+            <div class="hangman">
+                <div class="part head"></div>
+                <div class="part body"></div>
+                <div class="part left-arm"></div>
+                <div class="part right-arm"></div>
+                <div class="part left-leg"></div>
+                <div class="part right-leg"></div>
+            </div>
+        </div>
+
+        <div id="wordDisplay">_ _ _ _ _</div>
+        <!-- this div is used to display the word with underscores for each letter, it will be updated dynamically by the js file-->
+        
+        <div id="inputArea">
+            <!-- this div is used to group the input and button together so that i can easily edit it in one go in the css file-->
+            
+            <label for="letterInput">Pick a letter:</label>
+                <!-- label tag is used to define a label for the input field -->
+            
+                <input type="text" id="letterInput" maxlength="1" />
+             <!-- maxlength="1" limits input to one character -->
+           
+             <button id="submitBtn">Submit</button>
+            <!-- this button is used to submit the letter input by the user -->
+
+        </div>
+
+        <p id="message"></p>
+        <!-- this paragraph is used to display the message to the user whether they won or lose or to reset-->
+        <button id="resetBtn">Reset</button> <!-- this button is used to reset the game and start over -->
+
+        <a href="index.html">
+             <!-- with the help of the a tag i can shift between pages back and forth-->
+            <button class="back-btn">← Back to Home</button>
+        </a>
+
+    </main>
 </body>
 </html>
