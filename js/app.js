@@ -1,66 +1,35 @@
-const words = ["PLANET", "ASTEROID", "GALAXY", "SPACEMAN"];
+/*-------------- Constants -------------*/
+const words = ["PLANET", "ASTEROID", "GALAXY", "SPACEMAN", "ASSEMBLY", "EARTH", "UNIVERSE", "GRAVITY"]; //word list for the game
+const maxAttempts = 6; //maximum number of incorrect attempts allowed
+
+/*---------- Variables (state) ---------*/
 let chosenWord;
 let guessedLetters;
 let attempts;
-const maxAttempts = 6;
+// these are all my conditions for the game
 
-const wordDisplay = document.getElementById("wordDisplay");
-const letterInput = document.getElementById("letterInput");
-const submitBtn = document.getElementById("submitBtn");
-const message = document.getElementById("message");
-const resetBtn = document.getElementById("resetBtn");
+/*----- Cached Element References  -----*/
+const wordDisplay = document.querySelector("#wordDisplay");
+const letterInput = document.querySelector("#letterInput");
+const submitBtn = document.querySelector("#submitBtn");
+const message = document.querySelector("#message");
+const resetBtn = document.querySelector("#resetBtn");
 const hangmanParts = document.querySelectorAll(".part");
 
-function initGame() {
-  chosenWord = words[Math.floor(Math.random() * words.length)];
-  guessedLetters = [];
-  attempts = maxAttempts;
-  message.textContent = "";
-  letterInput.value = "";
-  submitBtn.disabled = false;
-  letterInput.disabled = false;
-  updateDisplay();
-  hangmanParts.forEach(part => part.style.display = "none");
+/*-------------- Functions -------------*/
+function init() {
+    chosenWord = words[math.floor(Math.random() * words.length)]; // randomly select a word from the list
+    guessedLetters = [];//this will reset the guessed letters
+    attempts = maxAttempts;//max number of attempts is 6
+    message.textContent = ""; // clear any previous messages
+    letterInput.value = ""; // clear the input field from old rounds
+    submitBtn.disabled = false;// enable the submit button once reset
+    letterInput.disabled = false;// enable the input field once reset
+    updateDisplay();//this will update the display aftre each round
+    hangmanParts.forEach(part => part.style.display = "none");// hide all hangman parts at the start
 }
 
-function updateDisplay() {
-  const display = chosenWord
-    .split("")
-    .map(letter => (guessedLetters.includes(letter) ? letter : "_"))
-    .join(" ");
-  wordDisplay.textContent = display;
 
-  const wrongGuesses = guessedLetters.filter(letter => !chosenWord.includes(letter));
-  hangmanParts.forEach((part, index) => {
-    part.style.display = index < wrongGuesses.length ? "block" : "none";
-  });
+/*----------- Event Listeners ----------*/
 
-  if (!display.includes("_")) {
-    message.textContent = "🎉 You saved the spaceman!";
-    disableInput();
-  } else if (wrongGuesses.length >= maxAttempts) {
-    message.textContent = `☠️ Spaceman lost! The word was ${chosenWord}`;
-    disableInput();
-  }
-}
 
-function disableInput() {
-  submitBtn.disabled = true;
-  letterInput.disabled = true;
-}
-
-submitBtn.addEventListener("click", () => {
-  const input = letterInput.value.toUpperCase();
-  if (input && /^[A-Z]$/.test(input) && !guessedLetters.includes(input)) {
-    guessedLetters.push(input);
-    updateDisplay();
-  }
-  letterInput.value = "";
-});
-
-resetBtn.addEventListener("click", () => {
-  initGame();
-});
-
-// Initialize the game on page load
-initGame();
