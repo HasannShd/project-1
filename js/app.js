@@ -40,6 +40,20 @@ function init() {
   hangmanParts.forEach(part => part.style.display = "none");
 }
 
+function createKeyboard() {
+  const keyboard = document.querySelector("#keyboard");
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  alphabet.split("").forEach(letter => {
+    const btn = document.createElement("button");
+    btn.textContent = letter;
+    btn.classList.add("letter-btn");
+    btn.addEventListener("click", () => handleGuess(letter, btn));
+    keyboard.appendChild(btn);
+  });
+}
+
+
 function updateDisplay() {
 
     const display = chosenWord
@@ -72,6 +86,15 @@ function disableInput() {
     submitBtn.disabled = true;
     letterInput.disabled = true
 }// this function will disable the input field and the submit button when the game is over
+
+function handleGuess(letter, btn) {
+  if (!guessedLetters.includes(letter)) {
+    guessedLetters.push(letter);
+    btn.disabled = true; // disable button after it's clicked
+    updateDisplay();
+  }
+}
+
 
 /*----------- Event Listeners ----------*/
 submitBtn.addEventListener("click", () => {
