@@ -185,7 +185,10 @@ next-btn {
   align-items: center;               /* center row items horizontally */
   gap: 10px;
   max-width: 400px;
+  padding: 10px;
 }
+
+
 .letter-btn {
   padding: 10px 15px;
   font-size: 1.2rem;

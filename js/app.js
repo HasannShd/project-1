@@ -20,6 +20,9 @@ const message = document.querySelector("#message");
 const resetBtn = document.querySelector("#resetBtn");
 const hangmanParts = document.querySelectorAll(".part");
 const keyboard = document.querySelector("#keyboard");
+const toggleInstructionsBtn = document.querySelector("#toggleInstructions");
+const instructionsBox = document.querySelector("#instructionsBox");
+
 /*-------------- Functions -------------*/
 function init() {
   chosenWord = words[Math.floor(Math.random() * words.length)];
@@ -130,6 +133,11 @@ function handleGuess(letter, btn) {
 
 //   letterInput.value = ""; // Clear the input box
 // });// this will add the letter to the guessed letters and update the display
+
+toggleInstructionsBtn.addEventListener("click", () => {
+  instructionsBox.style.display =
+    instructionsBox.style.display === "none" ? "block" : "none";
+});
 
 resetBtn.addEventListener("click", () => {
   init(); // This re-initializes the game
