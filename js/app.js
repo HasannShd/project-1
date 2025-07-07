@@ -1,6 +1,7 @@
 /*-------------- Constants -------------*/
 const words = ["PLANET", "ASTEROID", "GALAXY", "SPACEMAN", "ASSEMBLY", "EARTH", "UNIVERSE", "GRAVITY"]; //word list for the game
 const maxAttempts = 6; //maximum number of incorrect attempts allowed
+const revealedLettersCount = 1; // how many letters to reveal at the start
 
 /*---------- Variables (state) ---------*/
 let chosenWord;
@@ -22,20 +23,22 @@ const hangmanParts = document.querySelectorAll(".part");
 
 /*-------------- Functions -------------*/
 function init() {
-    chosenWord = words[math]; // randomly select a word from the list
-    // console.log(chosenWord); // this will log the chosen word to the console
+  chosenWord = words[Math.floor(Math.random() * words.length)];
+  const lettersToReveal = new Set();
+  while (lettersToReveal.size < revealedLettersCount) {
+    const randomIndex = Math.floor(Math.random() * chosenWord.length);
+    lettersToReveal.add(chosenWord[randomIndex]);
+  }
+  guessedLetters = Array.from(lettersToReveal);
 
-    guessedLetters = [];//this will reset the guessed letters
-    attempts = maxAttempts;//max number of attempts is 6
-
-    message.textContent = ""; // clear any previous messages
-    letterInput.value = ""; // clear the input field from old rounds
-    submitBtn.disabled = false;// enable the submit button once reset
-    letterInput.disabled = false;// enable the input field once reset
-
-    updateDisplay();//this will update the display aftre each round
-    hangmanParts.forEach(part => part.style.display = "none");// hide all hangman parts at the start
-}// this function will reset the game and start over
+  attempts = maxAttempts;
+  message.textContent = "";
+  letterInput.value = "";
+  submitBtn.disabled = false;
+  letterInput.disabled = false;
+  updateDisplay();
+  hangmanParts.forEach(part => part.style.display = "none");
+}
 
 function updateDisplay() {
 

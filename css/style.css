@@ -1,7 +1,7 @@
 .Gallows {
   position: relative;
   width: 200px;
-  height: 250px;
+  height: 300px;
   margin: 2rem auto;
 }
 
@@ -27,7 +27,7 @@
 .gallow-rope {
   position: absolute;
   width: 2px;
-  height: 30px;
+  height: 50px;
   background: black;
   left: 110px;
   top: 10px;
@@ -44,49 +44,49 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  top: 40px;
+  top: 60px;
   left: 90px;
 }
 
 .body {
-  width: 5px;
+  width: 6px;
   height: 60px;
-  top: 80px;
+  top: 100px;
   left: 108px;
 }
 
 .left-arm, .right-arm {
   width: 40px;
   height: 5px;
-  top: 100px;
+  top: 110px;
 }
 
 .left-arm {
-  left: 68px;
+  left: 71px;
   transform: rotate(-45deg);
   transform-origin: right;
 }
 
 .right-arm {
-  left: 108px;
+  left: 109px;
   transform: rotate(45deg);
   transform-origin: left;
 }
 
 .left-leg, .right-leg {
-  width: 40px;
-  height: 5px;
-  top: 140px;
+  width: 6px;
+  height: 40px;
+  top: 155px;
 }
 
 .left-leg {
-  left: 68px;
+  left: 93px;
   transform: rotate(45deg);
   transform-origin: right;
 }
 
 .right-leg {
-  left: 108px;
+  left: 124px;
   transform: rotate(-45deg);
   transform-origin: left;
 }
