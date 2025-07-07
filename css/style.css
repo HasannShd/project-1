@@ -110,6 +110,7 @@ next-btn {
   position: absolute;
   display: none;
   background: black;
+   transition: opacity 0.3s ease-in;
 }
 
 .head {
@@ -175,4 +176,31 @@ next-btn {
   font-size: 24px;
   margin-top: 20px;
   
+}
+#keyboard {
+  margin: 20px auto;                 /* centers the keyboard horizontally */
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;            /* stack rows vertically */
+  align-items: center;               /* center row items horizontally */
+  gap: 10px;
+  max-width: 400px;
+}
+.letter-btn {
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  background-color: #333;
+  border: 2px solid #333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.letter-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.letter-btn:hover:not(:disabled) {
+  background-color: #ddd;
 }

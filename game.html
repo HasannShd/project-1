@@ -38,25 +38,20 @@
         <div id="wordDisplay">_ _ _ _ _</div>
         <!-- this div is used to display the word with underscores for each letter, it will be updated dynamically by the js file-->
         
-        <div id="inputArea">
-            <!-- this div is used to group the input and button together so that i can easily edit it in one go in the css file-->
-            
-            <label for="letterInput">Pick a letter:</label>
-                <!-- label tag is used to define a label for the input field -->
-            
-                <input type="text" id="letterInput" maxlength="1" />
-             <!-- maxlength="1" limits input to one character -->
-           
-             <button id="submitBtn">Submit</button>
-            <!-- this button is used to submit the letter input by the user -->
 
-        </div>
+       <!---first i was using div id for inputarea and using label and input type and button id for submit btn but then i changed it all to on screen keyboard-->
+      
+       <div id="keyboard"></div>
+        <!-- this div is used to display the keyboard, it will be updated dynamically by the js file-->
 
         <p id="message"></p>
         <!-- this paragraph is used to display the message to the user whether they won or lose or to reset-->
 
         <button id="resetBtn">Reset</button> 
         <!-- this button is used to reset the game and start over -->
+
+        <button id="hintBtn">💡 Hint</button>
+        
 
         <a href="index.html">
              <!-- with the help of the a tag i can shift between pages back and forth-->
