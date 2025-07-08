@@ -1,10 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
 /* ----------- Base Styles ----------- */
 body {
   font-family: 'Segoe UI', sans-serif;
+  /* Use a modern sans-serif font */
+  font-size: large;
   text-align: center;
+  /* Center text */
   background: #f5f5f5;
   color: #222;
   padding: 20px;
+  /* Add padding to the body */
   margin: 0;
 }
 
@@ -12,7 +20,9 @@ body {
 header h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  /* Add space below the header */
 }
+
 /* ----------- Instructions ----------- */
 .instructions-box {
   max-width: 600px;
@@ -21,7 +31,7 @@ header h1 {
   text-align: left;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .instructions-box h2 {
@@ -76,27 +86,15 @@ button:hover,
 .back-btn {
   background-color: #007bff;
 }
+
 .back-btn:hover {
   background-color: #0056b3;
-}
-
-.next-btn {
-  background-color: #28a745;
-}
-.next-btn:hover {
-  background-color: #218838;
-}
-
-.reset-btn {
-  background-color: #dc3545;
-}
-.reset-btn:hover {
-  background-color: #c82333;
 }
 
 .info-btn {
   background-color: #444;
 }
+
 .info-btn:hover {
   background-color: #333;
 }
@@ -104,6 +102,7 @@ button:hover,
 .start-btn {
   background-color: #444;
 }
+
 .start-btn:hover {
   background-color: #222;
 }
@@ -115,6 +114,7 @@ button:hover,
   height: 300px;
   margin: 2rem auto;
 }
+
 .gallow-vertical,
 .gallow-top,
 .gallow-base {
@@ -123,6 +123,7 @@ button:hover,
   border-radius: 4px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
+
 .gallow-vertical {
   width: 10px;
   height: 250px;
@@ -146,18 +147,20 @@ button:hover,
   left: 136px;
   top: 10px;
 }
+
 .gallow-base {
   width: 100px;
   height: 10px;
   left: -15px;
   top: 250px;
 }
+
 /* Hangman body parts */
 .part {
   position: absolute;
   display: none;
   background: black;
-   transition: opacity 0.3s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 
 .head {
@@ -178,15 +181,18 @@ button:hover,
   background-color: #222;
 }
 
-.left-arm, .right-arm {
+.left-arm,
+.right-arm {
   width: 35px;
   height: 5px;
-  top: 115px; /* closer to upper chest */
+  top: 115px;
+  /* closer to upper chest */
   background-color: #222;
 }
 
 .left-arm {
-  left: 104px; /* slightly inward */
+  left: 104px;
+  /* slightly inward */
   transform: rotate(-40deg);
   transform-origin: right;
 }
@@ -197,9 +203,10 @@ button:hover,
   transform-origin: left;
 }
 
-.left-leg, .right-leg {
+.left-leg,
+.right-leg {
   width: 36px;
-  height:6px;
+  height: 6px;
   top: 151px;
   background-color: #222;
 }
@@ -215,17 +222,22 @@ button:hover,
   transform: rotate(40deg);
   transform-origin: left;
 }
+
 /* ----------- Keyboard ----------- */
 #keyboard {
-  margin: 20px auto;                 /* centers the keyboard horizontally */
+  margin: 20px auto;
+  /* centers the keyboard horizontally */
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;            /* stack rows vertically */
-  align-items: center;               /* center row items horizontally */
+  flex-direction: row;
+  /* stack rows vertically */
+  align-items: center;
+  /* center row items horizontally */
   gap: 10px;
   max-width: 400px;
   padding: 10px;
 }
+
 .letter-btn {
   padding: 10px 15px;
   font-size: 1.2rem;
