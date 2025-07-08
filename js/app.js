@@ -1,5 +1,5 @@
 /*-------------- Constants -------------*/
-const words = ["PLANET", "ASTEROID", "GALAXY", "SPACEMAN","PLUTO","EARTH", "UNIVERSE", "GRAVITY"]; //word list for the game
+const words = ["PLANET", "ASTEROID", "GALAXY", "SPACEMAN", "PLUTO", "EARTH", "UNIVERSE", "GRAVITY"]; //word list for the game
 const maxAttempts = 6; //maximum number of incorrect attempts allowed
 const revealedLettersCount = 1; // how many letters to reveal at the start
 
@@ -11,7 +11,6 @@ let hintUsed = false;
 let math = Math.floor(Math.random() * words.length);
 // console.log(math); // this will log the random number generated to the console
 
-
 // these are all my conditions for the game
 
 /*----- Cached Element References  -----*/
@@ -22,10 +21,12 @@ const hangmanParts = document.querySelectorAll(".part");
 const keyboard = document.querySelector("#keyboard");
 const toggleInstructionsBtn = document.querySelector("#toggleInstructions");
 const instructionsBox = document.querySelector("#instructionsBox");
+const hintBtn = document.querySelector("#hintBtn");
 
 /*-------------- Functions -------------*/
 function init() {
   chosenWord = words[Math.floor(Math.random() * words.length)];
+
   const lettersToReveal = new Set();
   while (lettersToReveal.size < revealedLettersCount) {
     const randomIndex = Math.floor(Math.random() * chosenWord.length);
@@ -35,17 +36,22 @@ function init() {
 
   attempts = maxAttempts;
   message.textContent = "";
-
   hintUsed = false;
-  hintBtn.disabled = false;
-  hintBtn.textContent = "💡 Hint";
 
-  keyboard.innerHTML = ""; // Clear previous keys
-  createKeyboard();        // 🔑 Create new keys
+  if (hintBtn) {
+    hintBtn.disabled = false;
+    hintBtn.textContent = "💡 Hint";
+  }
 
-  updateDisplay();
-  hangmanParts.forEach(part => part.style.display = "none");
+  if (keyboard) {
+    keyboard.innerHTML = ""; // clear previous keyboard buttons
+    createKeyboard();        // generate new keyboard buttons
+  }
+
+  hangmanParts.forEach(part => part.style.display = "none"); // hide all hangman parts at start
+  updateDisplay(); // update word display with revealed letter
 }
+
 function useHint() {
   if (hintUsed) return; // Prevent using it more than once
 
@@ -58,17 +64,17 @@ function useHint() {
 
   // Pick a random unrevealed letter
   const randomLetter = unrevealedLetters[Math.floor(Math.random() * unrevealedLetters.length)];
-
   guessedLetters.push(randomLetter);
   updateDisplay();
 
   hintUsed = true;
-  hintBtn.disabled = true;
-  hintBtn.textContent = "✅ Hint Used";
+  if (hintBtn) {
+    hintBtn.disabled = true;
+    hintBtn.textContent = "✅ Hint Used";
+  }
 }
 
 function createKeyboard() {
-  const keyboard = document.querySelector("#keyboard");
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
   alphabet.split("").forEach(letter => {
@@ -80,39 +86,27 @@ function createKeyboard() {
   });
 }
 
-
 function updateDisplay() {
-
   const display = chosenWord
-    .split("")// this wil split the word into an array like (["P", "L", "A", "N", "E", "T"])
-    .map(letter => (guessedLetters.includes(letter) ? letter : "_"))// this will map the letters to either the letter itself if it has been guessed or an underscore if it hasn't
+    .split("") // this will split the word into an array like (["P", "L", "A", "N", "E", "T"])
+    .map(letter => (guessedLetters.includes(letter) ? letter : "_")) // this will map letters to either the letter itself or an underscore
     .join(" "); // this will join the letters with a space in between
 
-  wordDisplay.textContent = display;// this will display the word in the word display element mentioned in the HTML
-  const wrongGuesses = guessedLetters.filter(letter => !chosenWord.includes(letter));// this will filter the guessed letters to only include the ones that are not in the chosen word
+  wordDisplay.textContent = display; // display the word in the word display element
+  const wrongGuesses = guessedLetters.filter(letter => !chosenWord.includes(letter)); // only include wrong guesses
 
   hangmanParts.forEach((part, index) => {
     part.style.display = index < wrongGuesses.length ? "block" : "none";
   });
 
-
   if (!display.includes("_")) {
     message.textContent = "🎉 You saved the spaceman!";
-    disableInput();// this will display the message if the user has won the game
-  }
-  else if (wrongGuesses.length >= maxAttempts) {
+    disableInput(); // display the win message
+  } else if (wrongGuesses.length >= maxAttempts) {
     message.textContent = `☠️ Spaceman lost! The word was ${chosenWord}`;
-    disableInput();
-  }// this will check if the user has won or lost the game and display the appropriate message
-
-}//this function shows the hangman parts based on the number of wrong guesses 
-// also checks if the game is won or lost
-// shows and hides hangman body parts
-
-function disableInput() {
-  submitBtn.disabled = true;
-  letterInput.disabled = true
-}// this function will disable the input field and the submit button when the game is over
+    disableInput(); // display the loss message
+  }
+}// this function shows the hangman parts based on wrong guesses and checks for win/loss
 
 function handleGuess(letter, btn) {
   if (!guessedLetters.includes(letter)) {
@@ -122,31 +116,35 @@ function handleGuess(letter, btn) {
   }
 }
 
+function disableInput() {
+  // disables keyboard input (used when game is over)
+  document.querySelectorAll(".letter-btn").forEach(btn => btn.disabled = true);
+}
+
 /*----------- Event Listeners ----------*/
-// submitBtn.addEventListener("click", () => {
-//   const letter = letterInput.value.toUpperCase(); // get the letter from the input field and convert it to uppercase
+document.addEventListener("DOMContentLoaded", () => {
+  // only on home page: toggle instructions box
+  if (toggleInstructionsBtn && instructionsBox) {
+    toggleInstructionsBtn.addEventListener("click", () => {
+      instructionsBox.style.display =
+        instructionsBox.style.display === "none" ? "block" : "none";
+    });
+  }
 
-//   if (letter && /^[A-Z]$/.test(letter) && !guessedLetters.includes(letter)) {
-//     guessedLetters.push(letter); // Add the letter to guessed letters
-//     updateDisplay(); // Refresh the word display and hangman
-//   }
+  // only on game page: use hint button
+  if (hintBtn) {
+    hintBtn.addEventListener("click", useHint);
+  }
 
-//   letterInput.value = ""; // Clear the input box
-// });// this will add the letter to the guessed letters and update the display
+  // initialize the game if on game page (wordDisplay is present)
+  if (wordDisplay) {
+    init();
+  }
 
-toggleInstructionsBtn.addEventListener("click", () => {
-  instructionsBox.style.display =
-    instructionsBox.style.display === "none" ? "block" : "none";
+  // reset game when reset button is clicked
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      init();
+    });
+  }
 });
-
-resetBtn.addEventListener("click", () => {
-  init(); // This re-initializes the game
-});// this will reset the game when the reset button is clicked
-
-const hintBtn = document.getElementById("hintBtn");
-
-hintBtn.addEventListener("click", useHint);
-
-// -----------------------------------------------
-// Initialize the game when the page loads
-init();
